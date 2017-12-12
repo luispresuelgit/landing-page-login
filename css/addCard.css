@@ -1,23 +1,4 @@
 
-		.navbar-nav>li>a{
-		    font-family: proxima-nova, sans-serif;
-		    font-size: 25px;
-		    font-weight: 600;
-		    font-style: normal;
-		    letter-spacing: .12em;
-		    text-transform: uppercase;
-				padding-top: 25px;
-				padding-bottom: 15px;
-		}
-
-		nav li {
-		  display: inline-block;
-		  vertical-align: top; //always use vertical align for inline-block element
-		}
-		nav a {
-		  display: block;
-		}
-
 		.buttonQick{
 	    -webkit-transition-duration: 0.4s; /* Safari */
 	    transition-duration: 0.4s;
