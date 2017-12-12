@@ -6,7 +6,7 @@ $(document).ready(function() {
 
         $.ajax({
                     type: "POST",
-                    url: 'https://qick.co:8081/auth/login', //ruta absoluta
+                    url: 'https://qick.co:8443/auth/login', //ruta absoluta
                     data: JSON.stringify({username:usrn,password:pwd}),
                     dataType: "json",
                     contentType: "application/json",
