@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $('#shopper-login').submit(function() {
+    $('#shopper-login').submit(function(event) {
         event.preventDefault();
-        var usrn = $('#loginForm').children('input[name="username"]').val();
-        var pwd = $('#loginForm').children('input[type="password"]').val();
+        var usrn = $('#shopper-login :input[name=email]').val();
+        var pwd = $('#shopper-login :input[type=password]').val();
 
         $.ajax({
                     type: "POST",
