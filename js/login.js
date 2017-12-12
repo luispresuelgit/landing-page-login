@@ -16,9 +16,9 @@ $(document).ready(function() {
                             alert("Error : 219");
                         }
                         else{
-                          alert("Login successful");
                             Cookies.set('token', data);
                             Cookies.set('username',usrn);
+                            location.href = "/cards";
 
                         }
                     },
