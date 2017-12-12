@@ -15,7 +15,7 @@ function getCardsFromServer(){
   var sessionToken = JSON.parse(Cookies.get('token'));
   $.ajax({
     type: "GET",
-    url: 'http://qick.co:8081/cards',
+    url: 'https://qick.co:8443/cards',
     headers: {
       Authorization: 'Bearer '+sessionToken['token']
     },
@@ -75,7 +75,7 @@ function setDefault(card_id_div){
 
     $.ajax({
       type: "PATCH",
-      url: 'http://qick.co:8081/cards/'+card_id,
+      url: 'https://qick.co:8443/cards/'+card_id,
       headers: {
         Authorization: 'Bearer '+sessionToken['token'],
       },
@@ -130,7 +130,7 @@ function cardDelete(card_id_div){
   card_id = card_id_div.getAttribute('id');
     $.ajax({
       type: "DELETE",
-      url: 'http://qick.co:8081/cards/'+card_id,
+      url: 'https://qick.co:8443/cards/'+card_id,
       headers: {
         Authorization: 'Bearer '+sessionToken['token'],
       },
