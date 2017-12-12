@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+
+    <!-- Load Javascript Cookie -->
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!--Load page css -->
+    <link rel="stylesheet" href="https://rawgit.com/luispresuelgit/landing-page-login/master/css/style.css">
+
+    <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/checkIfNotLogged.js"></script>
+    <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/addCard.js"></script>
+    <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/card-form.js"></script>
+
+    <title>Qick</title>
+  </head>
+  <body>
+
+    <!-- <div class="container"> -->
+      <div id="Checkout" class="inline">
+          <h1>Add your credit card</h1>
+          <div class="card-row">
+              <span class="visa"></span>
+              <span class="mastercard"></span>
+              <span class="amex"></span>
+              <span class="discover"></span>
+          </div>
+          <form>
+
+              <div class="form-group">
+                  <label for="CreditCardNumber">Card number</label>
+                  <input id="CreditCardNumber" class="null card-image form-control" type="text" maxlength="16"></input>
+              </div>
+              <div class="expiry-date-group form-group">
+                  <label for="ExpiryDate">Expiry date</label>
+                  <input id="ExpiryDateMonth" class="form-control" type="text" placeholder="MM" maxlength="2"></input>
+
+                  <input id="ExpiryDateYear" class="form-control" type="text" placeholder="YY" maxlength="2"></input>
+              </div>
+              <div class="security-code-group form-group">
+                  <label for="SecurityCode">Security code</label>
+                  <div class="input-container" >
+                      <input id="SecurityCode" class="form-control" type="text" maxlength="3"></input>
+                      <i id="cvc" class="fa fa-question-circle"></i>
+                  </div>
+                  <div class="cvc-preview-container two-card hide">
+                      <div class="amex-cvc-preview"></div>
+                      <div class="visa-mc-dis-cvc-preview"></div>
+                  </div>
+              </div>
+
+              <button class="btn btn-block btn-success" onclick="getStripePublicKey()" >Add Credit Card</button>
+          </form>
+
+      </div>
+      <div class="col-md-8 col-md-offset-3">
+        <br>
+          <a href="/Addedcards.html" class="btn btn-info"> &laquo;Regresar </a>
+        <br>
+      </div>
+  </body>
+</html>
