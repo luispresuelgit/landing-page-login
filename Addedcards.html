@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Load JQuery-->
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <!-- Load Javascript Cookie -->
+		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- Load JsRender latest version, from www.jsviews.com: -->
+ 		<script src="//www.jsviews.com/download/jsrender.js"></script>
+
+    <!-- sweet alert-->
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
+    <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/checkIfNotLogged.js"></script>
+    <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/addCard.js"></script>
+
+
+    <title>Qick</title>
+
+  </head>
+  <body>
+
+    <div id="qick-nav-bar"></div>
+
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Welcome </h1>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Added Cards</h3>
+      <button class="btn btn-success" onclick="openCardForm()">Add new card </button>
+      <div class="panel">
+        <div class="loader"></div>
+          <div id="cards">
+
+          </div>
+
+      </div>
+    </div>
+
+    <script id="cards-display-tmp" type="text/x-jsrender">
+    <div id="card-panel">
+     {{for cardsObj}}
+
+      <div class="card-box" id="{{if default == true}}card-disabled{{/if}}">
+          <div id="card-details">
+
+            <img src="https://rawgit.com/luispresuelgit/landing-page-login/668dcf2f824bfc76d4d7c83714621bcda9ac3cc6/images/Credit-Card-icon.png" height="30px" width="30px" alt="qick">
+            <label for="CreditCardNumberD">Card number</label>
+            <input id="CreditCardNumberS" type="text"  size="19" value = "**** **** **** {{:last4}}" disabled></input>
+
+            <label for="ExpiryDateD">Expiry date (Month/Year) </label>
+            <input id="ExpiryDateMonthD" type="text" placeholder="MM"  size="7" value = "{{:exp_month}}/{{:exp_year}}" disabled></input>
+
+            {{if default == false}}
+            <button id="{{:id}}" class="buttonQick" onclick="setDefault(this)">set as default</button>
+            <button id="{{:id}}" class="buttonDelete" onclick="cardDeleteAlert(this)">Delete</button>
+          {{/if}}
+          </div>
+      </div>
+     {{/for}}
+    </div>
+  </script>
+
+  </body>
+</html>

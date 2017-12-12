@@ -71,14 +71,11 @@ function setDefault(card_id_div){
   $("#cards").hide();
   $(".loader").show();
   var sessionToken = JSON.parse(Cookies.get('token'));
-  console.log(card_id_div);
-
   card_id = card_id_div.getAttribute('id');
-  console.log(card_id);
+
     $.ajax({
       type: "PATCH",
       url: 'http://qick.co:8081/cards/'+card_id,
-
       headers: {
         Authorization: 'Bearer '+sessionToken['token'],
       },
@@ -129,16 +126,11 @@ function cardDeleteAlert(card_id_div){
 function cardDelete(card_id_div){
   $("#cards").hide();
   $(".loader").show();
-  console.log("Preparando para borrar en el servidor");
-  console.log(card_id_div);
-
   var sessionToken = JSON.parse(Cookies.get('token'));
   card_id = card_id_div.getAttribute('id');
-  console.log(card_id);
     $.ajax({
       type: "DELETE",
       url: 'http://qick.co:8081/cards/'+card_id,
-
       headers: {
         Authorization: 'Bearer '+sessionToken['token'],
       },
