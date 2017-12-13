@@ -24,9 +24,6 @@ function userRegistration(){
                       alert("Error : 219");
                   }
                   else{
-                      console.log("Se registro, falta autenticarlo");
-                      console.log(data['username'],data['password']);
-                      //setTimeout(loginUser(data['username'], password_user), 3000);
                       loginUser(data['username'], password_user);
                   }
               },
