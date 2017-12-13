@@ -10,7 +10,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
     <!-- Load JsRender latest version, from www.jsviews.com: -->
- 		<script src="https//www.jsviews.com/download/jsrender.js"></script>
+ 		<script src="https://www.jsviews.com/download/jsrender.js"></script>
 
     <!--Load page css -->
     <link rel="stylesheet" href="https://rawgit.com/luispresuelgit/landing-page-login/master/css/addCard.css">
@@ -52,25 +52,37 @@
 
     <script id="cards-display-tmp" type="text/x-jsrender">
     <div id="card-panel">
-     {{for cardsObj}}
+      <table class="table">
+                 <thead>
+                   <tr>
+                     <th colspan="3">Details</th>
+                     <th>Actions</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                 {{for cardsObj}}
 
-      <div class="card-box" id="{{if default == true}}card-disabled{{/if}}">
-          <div id="card-details">
+                 <tr class="{{if default == true}}card-disabled{{else}}card-hoverable{{/if}}">
+                       <td rowspan="2" style="vertical-align: middle; text-align: center;"><img src="https://rawgit.com/luispresuelgit/landing-page-login/668dcf2f824bfc76d4d7c83714621bcda9ac3cc6/images/Credit-Card-icon.png" height="30px" width="30px" alt="qick"></td>
+                       <td><label for="CreditCardNumberD">Card number</label></td>
+                       <td><label for="CreditCardNumberV">**** {{:last4}}</label></td>
+                       <td rowspan="2" style="vertical-align: middle; text-align: center;">
+                       {{if default == false}}
+                         <button id="{{:id}}" class="buttonQick" onclick="setDefault(this)">set as default</button>
+                         <button id="{{:id}}" class="buttonQick2" onclick="cardDeleteAlert(this)">Delete</button>
+                       {{else}}
+                       <p><b>Default Payment</b></p>
+                       {{/if}}
+                       </td>
+                 </tr>
+                 <tr class="{{if default == true}}card-disabled{{else}}card-hoverable{{/if}}">
+                   <td><label for="ExpiryDateD">Expiry date (Month/Year) </label></td>
+                   <td><label for="ExpiryDateV"></input>{{:exp_month}}/{{:exp_year}}</td>
+                 </tr>
 
-            <img src="https://rawgit.com/luispresuelgit/landing-page-login/668dcf2f824bfc76d4d7c83714621bcda9ac3cc6/images/Credit-Card-icon.png" height="30px" width="30px" alt="qick">
-            <label for="CreditCardNumberD">Card number</label>
-            <input id="CreditCardNumberS" type="text"  size="19" value = "**** **** **** {{:last4}}" disabled></input>
-
-            <label for="ExpiryDateD">Expiry date (Month/Year) </label>
-            <input id="ExpiryDateMonthD" type="text" placeholder="MM"  size="7" value = "{{:exp_month}}/{{:exp_year}}" disabled></input>
-
-            {{if default == false}}
-            <button id="{{:id}}" class="buttonQick" onclick="setDefault(this)">set as default</button>
-            <button id="{{:id}}" class="buttonDelete" onclick="cardDeleteAlert(this)">Delete</button>
-          {{/if}}
-          </div>
-      </div>
-     {{/for}}
+                 {{/for}}
+                 </tbody>
+     </table>
     </div>
   </script>
 
