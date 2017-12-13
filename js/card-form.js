@@ -7,7 +7,7 @@ function getStripePublicKey(){
 
   $.ajax({
               type: "GET",
-              url: 'http://qick.co:8081/configurations/payment/public',
+              url: 'https://qick.co:8443/configurations/payment/public',
               headers: {
                 Authorization: 'Bearer '+sessionToken['token']
               },
