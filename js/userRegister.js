@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('form').attr('onsubmit', 'return true');
     $('form').submit(function(event) {
       event.preventDefault();
       var firstName_user = $('form :input[name=fname]').val();
