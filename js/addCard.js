@@ -44,7 +44,7 @@ function getCardsFromServer(){
 }
 
 function openCardForm(){
-  location.href = "payment-form/card-form.html";
+  location.href = "/add-cards";
 }
 
 
