@@ -9,7 +9,7 @@ function userRegistration(){
   //Sign up user
   $.ajax({
               type: "POST",
-              url: 'https://qick.co:8443/auth/login', //Absolute route
+              url: 'http://qick.co:8081/users', //Absolute route
               data: JSON.stringify({
                 firstname:firstName_user,
                 lastname:lastName_user,
@@ -38,9 +38,10 @@ function userRegistration(){
           });
 }
 function loginUser(usrn, pwd){
+          //Loggearse y almacenar el token en una Cookie
           $.ajax({
                       type: "POST",
-                      url: 'https://qick.co:8443/auth/login',
+                      url: 'https://qick.co:8443/auth/login', //ruta absoluta
                       data: JSON.stringify({username:usrn,password:pwd}),
                       dataType: "json",
                       contentType: "application/json",
@@ -51,7 +52,7 @@ function loginUser(usrn, pwd){
                           else{
                               Cookies.set('token', data);
                               Cookies.set('username',usrn);
-                              location.href = "/cards";
+                              location.href = "Addedcards.html";
                           }
                       },
                       error: function (data) {
@@ -59,7 +60,7 @@ function loginUser(usrn, pwd){
                               alert("Error : 465");
                           }
                           else {
-                              alert("Either your password or username are wrong");
+                              $("#alert-box").show();
                           }
                       }
           });
