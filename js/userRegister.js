@@ -10,7 +10,7 @@ $(document).ready(function() {
         //Sign up user
         $.ajax({
                     type: "POST",
-                    url: 'https://qick.co:8443/auth/login', //Absolute route
+                    url: 'https://qick.co:8443/users', //Absolute route
                     data: JSON.stringify({
                       firstname:firstName_user,
                       lastname:lastName_user,
