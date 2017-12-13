@@ -33,9 +33,8 @@ $(document).ready(function() {
         });
     });
 
-    $("a.sqs-block-button-element--medium.sqs-block-button-element").get(0).click(function(event){
+    $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
       event.preventDefault();
-      var url ="/shop2";
       location.href = "https://www.google.com";
       }
     );
