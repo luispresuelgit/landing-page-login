@@ -33,13 +33,9 @@ $(document).ready(function() {
         });
     });
 
-    $("#a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
+    $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
       event.preventDefault();
       location.href = "https://www.google.com";
       }
     );
-
-    //$('a.sqs-block-button-element--medium.sqs-block-button-element').get(0).click();
-
-
 });
