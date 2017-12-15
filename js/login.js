@@ -3,26 +3,50 @@ $(document).ready(function() {
         event.preventDefault();
         var usrn = $('#shopper-login :input[name=email]').val();
         var pwd = $('#shopper-login :input[type=password]').val();
+        var type="CUSTOMER";
+        loginUser(usrn,pwd,type);
+    });
 
-        $.ajax({
-                    type: "POST",
-                    url: 'https://qick.co:8443/auth/login', //ruta absoluta
-                    data: JSON.stringify({username:usrn,password:pwd}),
-                    dataType: "json",
-                    contentType: "application/json",
+    $('#seller-login').submit(function(event) {
+        event.preventDefault();
+        var usrn = $('#seller-login :input[name=email]').val();
+        var pwd = $('#seller-login :input[type=password]').val();
+        var type="MERCHANT";
+        loginUser(usrn,pwd,type);
+    });
 
-                    success: function (data) {
-                        if (data == undefined) {
-                            alert("Error : 219");
-                        }
-                        else{
-                            Cookies.set('token', data);
-                            Cookies.set('username',usrn);
-                            location.href = "/cards";
+    $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
+      event.preventDefault();
+      location.href = "https://www.google.com";
+      }
+    );
+});
 
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
+function loginUser(usrn, pwd, user_type){
+            //Loggearse y almacenar el token en una Cookie
+            $.ajax({
+                        type: "POST",
+                        url: 'https://qick.co:8443/auth/login?user_type='+user_type, //ruta absoluta
+                        data: JSON.stringify({username:usrn,password:pwd}),
+                        dataType: "json",
+                        contentType: "application/json",
+
+                        success: function (data) {
+                            if (data == undefined) {
+                                alert("Error : 219");
+                            }
+                            else{
+                              if(user_type === "CUSTOMER"){
+                                Cookies.set('token', data);
+                                Cookies.set('username',usrn);
+                                Cookies.set('user_type',user_type);
+                                location.href = "/cards";
+                              }else{
+                                alert("Seller logged");
+                              }
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
 
                           var catchedError = JSON.parse(jqXHR.responseText);
 
@@ -31,7 +55,7 @@ $(document).ready(function() {
                               if(catchedError.error.details[0].code === "username_or_password_not_found"){
                                 swal(
                                       'Please, try again',
-                                      'You need to provide both email and password',
+                                      'Username or password not found',
                                       'error'
                                     );
                               }
@@ -52,7 +76,14 @@ $(document).ready(function() {
                               else if(catchedError.error.details[0].code === "incomplete_user_trying_to_login"){
                                 swal(
                                       'Something went wrong',
-                                      'Current user is invalid"',
+                                      'Current user is invalid',
+                                      'error'
+                                    );
+                              }
+                              else if(catchedError.error.details[0].code === "invalid_user_type"){
+                                swal(
+                                      'Invalid profile type',
+                                      'Your user is not a '+(user_type==="CUSTOMER" ? "shopper":"seller"),
                                       'error'
                                     );
                               }
@@ -78,6 +109,9 @@ $(document).ready(function() {
                             else if(catchedError.error.details[0].code === "incomplete_user_trying_to_login"){
                               alert("Current user is invalid");
                             }
+                            else if(catchedError.error.details[0].code === "invalid_user_type"){
+                              alert("Your user is not a "+(user_type==="CUSTOMER" ? "shopper":"seller"));
+                            }
                             else{
                                 alert("There was an error processing your request, please try again later");
                             }
@@ -85,12 +119,6 @@ $(document).ready(function() {
                           }
 
                         }
-        });
-    });
 
-    $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
-      event.preventDefault();
-      location.href = "https://www.google.com";
-      }
-    );
-});
+            });
+    }
