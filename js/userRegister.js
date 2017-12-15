@@ -61,13 +61,34 @@ function loginUser(usrn, pwd){
                               location.href = "/cards";
                           }
                       },
-                      error: function (data) {
-                          if (data == undefined) {
-                              alert("Error : 465");
+                      error: function(jqXHR, textStatus, errorThrown) {
+                        var catchedError = JSON.parse(jqXHR.responseText);
+
+                        try{
+                          if(catchedError.error.details[0].code === "username_taken"){
+                            swal(
+                                  'Something went wrong',
+                                  'Username or Email is already used',
+                                  'error'
+                                );
                           }
                           else {
-                              alert("Either your password or username are wrong");
+                            swal(
+                                  'Oops',
+                                  'There was an error processing your request, please try again later',
+                                  'error'
+                                );
                           }
-                      }
+                        }
+                        catch(err){
+                          if(catchedError.error.details[0].code === "username_taken"){
+                            alert("Username or Email is already used");
+                          }
+                          else {
+                            alert("There was an error processing your request, please try again later");
+                          }
+                        }
+
+                    }
           });
 }

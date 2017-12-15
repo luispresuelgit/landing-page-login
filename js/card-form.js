@@ -1,3 +1,6 @@
+function redirectToCards(){
+  location.href="/cards.html";
+}
 
 function getStripePublicKey(){
   event.preventDefault();
@@ -21,14 +24,51 @@ function getStripePublicKey(){
 
                   }
               },
-              error: function (data) {
-                  if (data == undefined) {
-                      alert("Error : 465");
-                  }
-                  else {
-                    alert("Error : 466");
+              error: function(jqXHR, textStatus, errorThrown) {
+                  var catchedError = JSON.parse(jqXHR.responseText);
 
-                  }
+                    try{
+                      if(catchedError.error.details[0].code === "token_not_found"){
+                        swal(
+                              'Something went wrong',
+                              'Required session Token was not found on request. Please, try again later',
+                              'error'
+                            );
+                      }
+                      else if(catchedError.error.details[0].code === "invalid_authorization_header"){
+                        swal(
+                              'Something went wrong',
+                              'Invalid Authorization header found. Please, try again later',
+                              'error'
+                            );
+                      }
+                      else if(catchedError.error.details[0].code === "invalid_token_found"){
+                        swal(
+                              'Something wnet wrong',
+                              'Signature varification failed. Please, try again later',
+                              'error'
+                            );
+                      }else {
+                        swal(
+                              'Oops',
+                              'There was an error processing your request. Please try again later',
+                              'error'
+                            );
+                      }
+                    }
+                    catch(err){
+                      if(catchedError.error.details[0].code === "token_not_found"){
+                        alert("Required session Token was not found on request");
+                      }
+                      else if(catchedError.error.details[0].code === "invalid_authorization_header"){
+                        alert("Invalid Authorization header found");
+                      }
+                      else if(catchedError.error.details[0].code === "invalid_token_found"){
+                        alert("Signature varification failed");
+                      }else {
+                        alert("There was an error processing your request. Please try again later");
+                      }
+                    }
               }
     });
 
@@ -61,14 +101,86 @@ function getStripePublicKey(){
                         addCardToServer();
                     }
                 },
-                error: function (data) {
-                    if (data == undefined) {
-                        alert("Error : 465");
+                error: function(jqXHR, textStatus, errorThrown) {
+
+                      var catchedError = JSON.parse(jqXHR.responseText);
+                      //catchedError.error.code or catchedError.error.type
+                      try{
+                          if(catchedError.error.code === "incorrect_number"){
+                            swal(
+                                  'Invalid card number',
+                                  'Card number entered is invalid. Please, try again using a valid card number',
+                                  'error'
+                                );
+                          }
+                          else if(catchedError.error.code === "invalid_expiry_month"){
+                            swal(
+                                  'Invalid expiry month',
+                                  'Either invalid month entry or credit card have already expired',
+                                  'error'
+                                );
+
+                          }
+                          else if(catchedError.error.code === "invalid_expiry_year"){
+                            swal(
+                                  'Invalid expiry year',
+                                  'Either invalid year entry or credit card have already expired',
+                                  'error'
+                                );
+
+                          }else if(catchedError.error.code === "invalid_cvc"){
+                            swal(
+                                  'Invalid cvc',
+                                  'Your card\'s security code is invalid',
+                                  'error'
+                                );
+
+                          }else if(catchedError.error.type === "invalid_request_error"){
+                            swal(
+                                  'Oops, something went wrong',
+                                  'There was an error processing your request, please try again later',
+                                  'error'
+                                );
+
+                          }else {
+                            swal(
+                                  'Oops, something went wrong',
+                                  'There was an error processing your request, please try again later',
+                                  'error'
+                                );
+                              }
+                        }
+                        catch(err){
+                          if(catchedError.error.code === "incorrect_number"){
+
+                                  alert('Card number entered is invalid. Please, try again using a valid card number');
+
+                          }
+                          else if(catchedError.error.code === "invalid_expiry_month"){
+
+                                  alert('Either invalid month entry or credit card have already expired');
+
+                          }
+                          else if(catchedError.error.code === "invalid_expiry_year"){
+
+                                  alert('Either invalid year entry or credit card have already expired');
+
+
+                          }else if(catchedError.error.code === "invalid_cvc"){
+
+                                alert('Your card\'s security code is invalid');
+
+                          }else if(catchedError.error.type === "invalid_request_error"){
+
+                                  alert('There was an error processing your request, please try again later');
+
+                          }else {
+                                  alert('There was an error processing your request, please try again later');
+
+                          }
+                        }
+
                     }
-                    else {
-                        alert("Error : 466");
-                    }
-                }
               });
           }
 
@@ -93,13 +205,51 @@ function getStripePublicKey(){
                       location.href="/cards";
                   }
               },
-              error: function (data) {
-                  if (data == undefined) {
-                      alert("Error : 465");
+              error: function(jqXHR, textStatus, errorThrown) {
+
+                var catchedError = JSON.parse(jqXHR.responseText);
+                try{
+                  if(catchedError.error.details[0].code === "token_not_found"){
+                    swal(
+                          'Something went wrong',
+                          'Required session Token was not found on request. Please, try again later',
+                          'error'
+                        );
                   }
-                  else {
-                      alert("Error : 466");
+                  else if(catchedError.error.details[0].code === "invalid_authorization_header"){
+                    swal(
+                          'Something went wrong',
+                          'Invalid Authorization header found. Please, try again later',
+                          'error'
+                        );
                   }
+                  else if(catchedError.error.details[0].code === "invalid_token_found"){
+                    swal(
+                          '',
+                          'Signature varification failed. Please, try again later',
+                          'error'
+                        );
+                  }else {
+                    swal(
+                          'Oops',
+                          'There was an error processing your request, please try again later',
+                          'error'
+                        );
+                  }
+                }
+                catch(err){
+                  if(catchedError.error.details[0].code === "token_not_found"){
+                    alert("Required session Token was not found on request");
+                  }
+                  else if(catchedError.error.details[0].code === "invalid_authorization_header"){
+                    alert("Invalid Authorization header found");
+                  }
+                  else if(catchedError.error.details[0].code === "invalid_token_found"){
+                    alert("Signature varification failed");
+                  }else {
+                    alert("There was an error processing your request, please try again later");
+                  }
+                }
               }
             });
           }
