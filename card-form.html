@@ -14,6 +14,11 @@
     <!--Load page css -->
     <link rel="stylesheet" href="https://rawgit.com/luispresuelgit/landing-page-login/master/css/style.css">
 
+    <!-- sweet alert-->
+    <script src="https://unpkg.com/sweetalert2@7.0.9/dist/sweetalert2.all.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+
     <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/checkIfNotLogged.js"></script>
 
     <script src="https://rawgit.com/luispresuelgit/landing-page-login/master/js/card-form.js"></script>
@@ -61,7 +66,7 @@
       </div>
       <div class="col-md-8 col-md-offset-3">
         <br>
-          <a href="/cards" class="btn btn-info"> &laquo;Regresar </a>
+          <button class="buttonQick" onclick="redirectToCards()"> &laquo;Go back </button>
         <br>
       </div>
   </body>
