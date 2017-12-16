@@ -42,7 +42,11 @@ function loginUser(usrn, pwd, user_type){
                                 Cookies.set('user_type',user_type);
                                 location.href = "/cards";
                               }else{
-                                alert("Seller logged");
+                                $('<form action="http://qick.co:3000/set-token" method="POST">' +
+                                    '<input type="hidden" name="token" value="'+data.token+'">' +
+                                    '</form>')
+                                    .appendTo($(document.body))
+                                    .submit();
                               }
                             }
                         },
