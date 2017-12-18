@@ -6,7 +6,7 @@ $(document).ready(function() {
       var lastName_user = $('form :input[name=lname]').val();
       var userName_user = $('form :input[name=email]').val();
       var password_user = $('form :input[type=password]').val();
-      var password_confirm = $('form :input[id=text-yui_3_17_2_1_1509417288714_89069-field]').val();
+      var password_confirm = $('form :input[id=password-yui_3_17_2_1_1513569220138_17934-field]').val();
       if(password_user == password_confirm){
         //Sign up user
         $.ajax({
