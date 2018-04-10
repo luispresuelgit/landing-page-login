@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $.getScript("js/global_variables.js")
+  $.getScript("https://rawgit.com/luispresuelgit/landing-page-login/master/js/global_variables.js")
     .done(function( script, textStatus ) {
       console.log( textStatus );
     })
