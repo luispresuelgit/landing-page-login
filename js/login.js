@@ -1,32 +1,39 @@
 $(document).ready(function() {
-    $('#shopper-login').submit(function(event) {
-        event.preventDefault();
-        var usrn = $('#shopper-login :input[name=email]').val();
-        var pwd = $('#shopper-login :input[type=password]').val();
-        var type="CUSTOMER";
-        loginUser(usrn,pwd,type);
-    });
-
-    $('#seller-login').submit(function(event) {
-        event.preventDefault();
-        var usrn = $('#seller-login :input[name=email]').val();
-        var pwd = $('#seller-login :input[type=password]').val();
-        var type="MERCHANT";
-        loginUser(usrn,pwd,type);
-    });
-
-    $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
+  $.getScript("js/global_variables.js")
+    .done(function( script, textStatus ) {
+      console.log( textStatus );
+    })
+    .fail(function( jqxhr, settings, exception ) {
+      console.log("Missing globlal variables")
+  });
+  $('#shopper-login').submit(function(event) {
       event.preventDefault();
-      location.href = "https://www.google.com";
-      }
-    );
+      var usrn = $('#shopper-login :input[name=email]').val();
+      var pwd = $('#shopper-login :input[type=password]').val();
+      var type="CUSTOMER";
+      loginUser(usrn,pwd,type);
+  });
+
+  $('#seller-login').submit(function(event) {
+      event.preventDefault();
+      var usrn = $('#seller-login :input[name=email]').val();
+      var pwd = $('#seller-login :input[type=password]').val();
+      var type="MERCHANT";
+      loginUser(usrn,pwd,type);
+  });
+
+  $("a.sqs-block-button-element--medium.sqs-block-button-element").click(function(event){
+    event.preventDefault();
+    location.href = "https://www.google.com";
+    }
+  );
 });
 
 function loginUser(usrn, pwd, user_type){
             //Loggearse y almacenar el token en una Cookie
             $.ajax({
                         type: "POST",
-                        url: 'https://qick.co:8443/auth/login?user_type='+user_type, //ruta absoluta
+                        url: QCS+'/auth/login?user_type='+user_type, //ruta absoluta
                         data: JSON.stringify({username:usrn,password:pwd}),
                         dataType: "json",
                         contentType: "application/json",

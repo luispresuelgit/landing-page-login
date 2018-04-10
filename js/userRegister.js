@@ -1,4 +1,12 @@
 $(document).ready(function() {
+  $.getScript("js/global_variables.js")
+    .done(function( script, textStatus ) {
+      console.log( textStatus );
+    })
+    .fail(function( jqxhr, settings, exception ) {
+      console.log("Missing globlal variables")
+  });
+
   $('form').attr('onsubmit', 'return true');
     $('form').submit(function(event) {
       event.preventDefault();
@@ -11,7 +19,7 @@ $(document).ready(function() {
         //Sign up user
         $.ajax({
                     type: "POST",
-                    url: 'https://qick.co:8443/users', //Absolute route
+                    url: QCS+'/users', //Absolute route
                     data: JSON.stringify({
                       firstname:firstName_user,
                       lastname:lastName_user,
@@ -66,9 +74,10 @@ $(document).ready(function() {
 });
 
 function loginUser(usrn, pwd){
+          user_type = "MERCHANT"
           $.ajax({
                       type: "POST",
-                      url: 'https://qick.co:8443/auth/login',
+                      url: QCS+'/auth/login?user_type='+user_type,,
                       data: JSON.stringify({username:usrn,password:pwd}),
                       dataType: "json",
                       contentType: "application/json",

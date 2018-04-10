@@ -1,3 +1,13 @@
+$(document).ready(function() {
+  $.getScript("js/global_variables.js")
+    .done(function( script, textStatus ) {
+      console.log( textStatus );
+    })
+    .fail(function( jqxhr, settings, exception ) {
+      console.log("Missing globlal variables")
+  });
+});
+
 function redirectToCards(){
   location.href="/cards.html";
 }
@@ -10,7 +20,7 @@ function getStripePublicKey(){
 
   $.ajax({
               type: "GET",
-              url: 'https://qick.co:8443/configurations/payment/public',
+              url: QCS+'/configurations/payment/public',
               headers: {
                 Authorization: 'Bearer '+sessionToken['token']
               },

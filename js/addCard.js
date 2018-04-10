@@ -1,5 +1,12 @@
 $(document).ready(function() {
-  getCardsFromServer();
+  $.getScript("js/global_variables.js")
+    .done(function( script, textStatus ) {
+      getCardsFromServer();
+      console.log( textStatus );
+    })
+    .fail(function( jqxhr, settings, exception ) {
+      console.log("Missing globlal variables")
+  });
 });
 
 function errorMessage(){
@@ -15,7 +22,7 @@ function getCardsFromServer(){
   var sessionToken = JSON.parse(Cookies.get('token'));
   $.ajax({
     type: "GET",
-    url: 'https://qick.co:8443/cards',
+    url: QCS+'/cards',
     headers: {
       Authorization: 'Bearer '+sessionToken['token']
     },
