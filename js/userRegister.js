@@ -74,10 +74,10 @@ $(document).ready(function() {
 });
 
 function loginUser(usrn, pwd){
-          user_type = "MERCHANT"
+          user_type = "CUSTOMER"
           $.ajax({
                       type: "POST",
-                      url: QCS+'/auth/login?user_type='+user_type,,
+                      url: QCS+'/auth/login?user_type='+user_type,
                       data: JSON.stringify({username:usrn,password:pwd}),
                       dataType: "json",
                       contentType: "application/json",
