@@ -201,7 +201,7 @@ function getStripePublicKey(){
 
             $.ajax({
               type: "POST",
-              url: 'https://qick.co:8443/cards?token_id='+cardToken['id'],
+              url: QCS+'/cards?token_id='+cardToken['id'],
               headers: {
                 Authorization: 'Bearer '+sessionToken['token']
               },
