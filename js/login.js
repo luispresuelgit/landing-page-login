@@ -49,7 +49,7 @@ function loginUser(usrn, pwd, user_type){
                                 Cookies.set('user_type',user_type);
                                 location.href = "/cards";
                               }else{
-                                $('<form action="http://qick.co:3000/set-token" method="POST">' +
+                                $('<form action="http://qick.co/set-token" method="POST">' +
                                     '<input type="hidden" name="token" value="'+data.token+'">' +
                                     '</form>')
                                     .appendTo($(document.body))
